@@ -22,31 +22,49 @@ namespace Revisao
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            if (txtId.Text.Length == 0 && txtName.Text.Length == 0 && txtCpf.Text.Length == 0 && txtRm.Text.Length == 0)
+            if (txtId.Text != "" || txtName.Text != "" || txtCpf.Text != "" || txtRm.Text != "")
             {
-                MessageBox.Show("Nenhum campo deve ficar Vazio!");
+                try
+                {
+                    MySqlConnection conect_db = new MySqlConnection("server=localhost;database=db_alunos;uid=root;pwd=123456");
+                    conect_db.Open();
+                    MySqlCommand cadastro = new MySqlCommand("INSERT INTO tb_aluno(id,nome,cpf,rm) values (" + txtId.Text + ",'" + txtName.Text + "','" + txtCpf.Text + "','" + txtRm.Text + "');", conect_db);
+                    cadastro.ExecuteNonQuery();
+
+                    MessageBox.Show("Cadastro Realizado com Sucesso!");
+
+                    MySqlDataAdapter adaptar = new MySqlDataAdapter("select * from tb_aluno", conect_db);
+                    DataTable dt = new DataTable();
+                    adaptar.Fill(dt);
+                    dgvAlunos.DataSource = dt;
+
+                    txtId.Text = "";
+                    txtName.Text = "";
+                    txtCpf.Text = "";
+                    txtRm.Text = "";
+                } catch
+                {
+                    MessageBox.Show("Id ja cadastrado");
+                }
             }
             else
             {
-                MySqlConnection conect_db = new MySqlConnection("server=localhost;database=db_alunos;uid=root;pwd=123456");
-                conect_db.Open();
-                MySqlCommand cadastro = new MySqlCommand("INSERT INTO tb_aluno(id,nome,cpf,rm) values (" + txtId.Text + ",'" + txtName.Text + "','" + txtCpf.Text + "','" + txtRm.Text + "');", conect_db);
-                cadastro.ExecuteNonQuery();
-
-                MessageBox.Show("Cadastro Realizado com Sucesso!");
-
-                MySqlDataAdapter adaptar = new MySqlDataAdapter("select * from tb_aluno", conect_db);
-                DataTable dt = new DataTable();
-                adaptar.Fill(dt);
-                dgvAlunos.DataSource = dt;
-
-                txtId.Text = "";
-                txtName.Text = "";
-                txtCpf.Text = "";
-                txtRm.Text = "";
+                MessageBox.Show("Nenhum campo deve ficar Vazio!");
             }
-            
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            MySqlConnection conect_db = new MySqlConnection("server=localhost;database=db_alunos;uid=root;pwd=123456");
+            conect_db.Open();
+            MySqlDataAdapter adaptar = new MySqlDataAdapter("select * from tb_aluno", conect_db);
+            DataTable dt = new DataTable();
+            adaptar.Fill(dt);
+            dgvAlunos.DataSource = dt;
+        }
+
+        private void dgvAlunos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }
