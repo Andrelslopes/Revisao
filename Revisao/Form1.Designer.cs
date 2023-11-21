@@ -31,7 +31,7 @@
             this.txtId = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtCpf = new System.Windows.Forms.TextBox();
-            this.txtRm = new System.Windows.Forms.TextBox();
+            this.txtRg = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,9 +39,9 @@
             this.dgvAlunos = new System.Windows.Forms.DataGridView();
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.txtNasc = new System.Windows.Forms.MaskedTextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtRm = new System.Windows.Forms.TextBox();
             this.btnAlterar = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlunos)).BeginInit();
@@ -68,12 +68,12 @@
             this.txtCpf.Size = new System.Drawing.Size(144, 20);
             this.txtCpf.TabIndex = 4;
             // 
-            // txtRm
+            // txtRg
             // 
-            this.txtRm.Location = new System.Drawing.Point(95, 82);
-            this.txtRm.Name = "txtRm";
-            this.txtRm.Size = new System.Drawing.Size(144, 20);
-            this.txtRm.TabIndex = 3;
+            this.txtRg.Location = new System.Drawing.Point(95, 82);
+            this.txtRg.Name = "txtRg";
+            this.txtRg.Size = new System.Drawing.Size(144, 20);
+            this.txtRg.TabIndex = 3;
             // 
             // label1
             // 
@@ -119,6 +119,7 @@
             this.dgvAlunos.Size = new System.Drawing.Size(693, 308);
             this.dgvAlunos.TabIndex = 7;
             this.dgvAlunos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAlunos_CellContentClick);
+            this.dgvAlunos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAlunos_CellMouseDoubleClick);
             // 
             // btnCadastrar
             // 
@@ -139,12 +140,12 @@
             this.label5.TabIndex = 5;
             this.label5.Text = "Data Nasc.:";
             // 
-            // maskedTextBox1
+            // txtNasc
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(95, 161);
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(100, 20);
-            this.maskedTextBox1.TabIndex = 2;
+            this.txtNasc.Location = new System.Drawing.Point(95, 161);
+            this.txtNasc.Name = "txtNasc";
+            this.txtNasc.Size = new System.Drawing.Size(100, 20);
+            this.txtNasc.TabIndex = 2;
             // 
             // label6
             // 
@@ -155,12 +156,12 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "RM:";
             // 
-            // textBox1
+            // txtRm
             // 
-            this.textBox1.Location = new System.Drawing.Point(95, 134);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(144, 20);
-            this.textBox1.TabIndex = 5;
+            this.txtRm.Location = new System.Drawing.Point(95, 134);
+            this.txtRm.Name = "txtRm";
+            this.txtRm.Size = new System.Drawing.Size(144, 20);
+            this.txtRm.TabIndex = 5;
             // 
             // btnAlterar
             // 
@@ -170,6 +171,7 @@
             this.btnAlterar.TabIndex = 9;
             this.btnAlterar.Text = "Alterar";
             this.btnAlterar.UseVisualStyleBackColor = true;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // btnDelete
             // 
@@ -179,6 +181,7 @@
             this.btnDelete.TabIndex = 10;
             this.btnDelete.Text = "Deletar";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // Form1
             // 
@@ -187,9 +190,9 @@
             this.ClientSize = new System.Drawing.Size(800, 541);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAlterar);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtRm);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.txtNasc);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnCadastrar);
             this.Controls.Add(this.dgvAlunos);
@@ -197,7 +200,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtRm);
+            this.Controls.Add(this.txtRg);
             this.Controls.Add(this.txtCpf);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.txtId);
@@ -215,7 +218,7 @@
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtCpf;
-        private System.Windows.Forms.TextBox txtRm;
+        private System.Windows.Forms.TextBox txtRg;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -223,9 +226,9 @@
         private System.Windows.Forms.DataGridView dgvAlunos;
         private System.Windows.Forms.Button btnCadastrar;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.MaskedTextBox txtNasc;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtRm;
         private System.Windows.Forms.Button btnAlterar;
         private System.Windows.Forms.Button btnDelete;
     }

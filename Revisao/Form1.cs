@@ -22,13 +22,13 @@ namespace Revisao
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            if (txtId.Text != "" || txtName.Text != "" || txtCpf.Text != "" || txtRm.Text != "")
+            if (txtId.Text != "" && txtName.Text != "" && txtCpf.Text != "" && txtRg.Text != "" && txtCpf.Text != "" && txtNasc.Text != "")
             {
                 try
                 {
                     MySqlConnection conect_db = new MySqlConnection("server=localhost;database=db_alunos;uid=root;pwd=123456");
                     conect_db.Open();
-                    MySqlCommand cadastro = new MySqlCommand("INSERT INTO tb_aluno(id,nome,cpf,rm) values (" + txtId.Text + ",'" + txtName.Text + "','" + txtCpf.Text + "','" + txtRm.Text + "');", conect_db);
+                    MySqlCommand cadastro = new MySqlCommand("INSERT INTO tb_aluno(id,nome,cpf,rm) values (" + txtId.Text + ",'" + txtName.Text + "','" + txtCpf.Text + "','" + txtRg.Text + "');", conect_db);
                     cadastro.ExecuteNonQuery();
 
                     MessageBox.Show("Cadastro Realizado com Sucesso!");
@@ -40,8 +40,10 @@ namespace Revisao
 
                     txtId.Text = "";
                     txtName.Text = "";
+                    txtRg.Text = "";
                     txtCpf.Text = "";
                     txtRm.Text = "";
+                    txtNasc.Text = "";
                 } catch
                 {
                     MessageBox.Show("Id ja cadastrado");
@@ -66,6 +68,41 @@ namespace Revisao
         private void dgvAlunos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btnAlterar_Click(object sender, EventArgs e)
+        {
+            string conexao = "server=localhost;database=db_alunos;uid=root;pwd=123456";
+            MySqlConnection conexaoMYSQL = new MySqlConnection(conexao);
+            conexaoMYSQL.Open();
+
+            MySqlCommand comando = new MySqlCommand("update tb_aluno set nome='" +txtName.Text+ "',Rg_aluno='"+txtRg.Text+"',cpf='"+txtCpf.Text+"',Rm='"+txtRm.Text+"',dt_nasc='"+txtNasc.Text+"' where id=" +txtId.Text, conexaoMYSQL);
+            comando.ExecuteNonQuery();
+
+            MessageBox.Show("Dados alterados com Sucesso!");
+            txtId.Text = "";
+            txtName.Text = "";
+            txtRg.Text = "";
+            txtCpf.Text = "";
+            txtRm.Text = "";
+            txtNasc.Text = "";
+
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvAlunos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            txtId.Text = dgvAlunos.Rows[e.RowIndex].Cells[0].Value.ToString();;
+            txtName.Text = dgvAlunos.Rows[e.RowIndex].Cells[1].Value.ToString();
+            txtRg.Text = dgvAlunos.Rows[e.RowIndex].Cells[2].Value.ToString();
+            txtCpf.Text = dgvAlunos.Rows[e.RowIndex].Cells[3].Value.ToString();
+            txtRm.Text = dgvAlunos.Rows[e.RowIndex].Cells[4].Value.ToString();
+            txtNasc.Text = dgvAlunos.Rows[e.RowIndex].Cells[5].Value.ToString();
         }
     }
 }
